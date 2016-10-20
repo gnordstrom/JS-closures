@@ -15,11 +15,11 @@ closure over the name variable. Invoke outer saving the return value into
 another variable called 'inner'. */
 
 // Code Here
-
+var inner = outer();
 //Once you do that, invoke inner.
 
 //Code Here
-
+inner();
 
 
 
@@ -48,7 +48,8 @@ Create a makeCall function that when invoked logs 'Calling Jake at 435-215-9248'
 in your console. */
 
   //Code Here
-
+var makeCall = callFriend();
+makeCall();
 
 
 
@@ -67,14 +68,20 @@ in your console. */
 properly. */
 
 //Code Here
+function makeCounter() {
+	var num = 0;
+	return function() {
+		num++;
+		return num;
+	}
+}
 
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
-
+  var count = makeCounter();
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 
@@ -96,12 +103,19 @@ function is responsible for decrementing the value by one. You will need to use
 the module pattern to achieve this. */
 
 function counterFactory(value) {
-
-  // Code here.
-
-
-  return {
-  }
+	var total = value;
+	function inc() {
+		total++;
+		return total;
+	}
+	function dec() {
+		total--;
+		return total;
+	}
+	return {
+		inc: inc,
+		dec: dec,
+	};
 }
 
 
@@ -129,10 +143,12 @@ function motivation(firstname, lastname){
   var welcomeText = 'You\'re doing awesome, keep it up ';
 
   // code message function here.
+	function message() {
+		return welcomeText + firstname + " " + lastname + ".";
+	}
 
-
-  //Uncommment this to return the value of your invoked message function
-  //return message();
+  // Uncommment this to return the value of your invoked message function
+  return message();
 
 }
 
@@ -171,13 +187,15 @@ var module = (function() {
 	// outside our lexical scope
 
   return {
-    // Code here.
+    publicMethod: function() {
+		 return privateMethod();
+	 }
   };
 
 })();
 
 // Uncomment this after you create your public method
-//   module.publicMethod();
+  module.publicMethod();
 
 
 
@@ -220,10 +238,29 @@ timeOutCounter();
 	#PROBLEM-08
 \******************************************************************************/
 
-var funcArray = [];
+var funcArray = [
+	function ind0() {
+		return 0;
+	},
+	function ind1() {
+		return 1;
+	},
+	function ind2() {
+		return 2;
+	},
+	function ind3() {
+		return 3;
+	},
+	function ind4() {
+		return 4;
+	},
+	function ind5() {
+		return 5;
+	},
+];
 
-/*
-  Make the following code work
+
+  // Make the following code work
 
   funcArray[0]() //0
   funcArray[1]() //1
@@ -232,5 +269,4 @@ var funcArray = [];
   funcArray[4]() //4
   funcArray[5]() //5
 
-  *Hint: Don't let this fool you. Break down what's really happening here.
-*/
+  // *Hint: Don't let this fool you. Break down what's really happening here.
